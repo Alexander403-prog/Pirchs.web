@@ -4,22 +4,33 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mi Portafolio Personal</title>
+    <title>Mi Portafolio - Alexander García Pirchs</title>
+
+    <!-- Bootstrap & FontAwesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+
     <style>
+        /* 🎨 Variables de color reutilizables */
         :root {
-            --primary-color: rgba(247, 171, 220, 0.799);
+            --primary-color: rgba(255, 2, 167, 0.799);
+            /* rosa suave */
             --secondary-color: #110a20;
-            --text-color: #fff;
+            /* violeta oscuro / fondo */
+            --text-color: #ffffff;
         }
 
+        /* 🔹 Estilos generales */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             scroll-behavior: smooth;
+            background-color: #3cf3f3e1;
+            color: #222;
+            padding-top: 74px;
+            /* espacio para navbar fixed */
         }
 
-        /* 🔹 Navbar */
+        /* === NAVBAR === */
         .navbar {
             background-color: transparent !important;
             transition: all 0.4s ease;
@@ -27,9 +38,9 @@
         }
 
         .navbar.scrolled {
-            background-color: rgba(255, 255, 255, 0.95) !important;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            padding: 10px 0;
+            background-color: rgba(13, 225, 233, 0.76) !important;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+            padding: 8px 0;
         }
 
         .navbar-brand {
@@ -50,19 +61,20 @@
             border-radius: 50%;
             object-fit: cover;
             margin-right: 10px;
-            transition: transform 0.3s ease, border-color 0.3s ease;
             border: 2px solid var(--primary-color);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+            background: #ee0606;
         }
 
         .navbar-brand img:hover {
-            transform: scale(1.1);
+            transform: scale(1.05);
         }
 
         .nav-link {
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 600;
             color: var(--text-color) !important;
-            margin: 0 10px;
+            margin: 0 8px;
             transition: color 0.3s ease;
         }
 
@@ -74,17 +86,21 @@
             color: var(--primary-color) !important;
         }
 
-        /* 🔹 Hero */
+        /* === HERO === */
         .hero-section {
             background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
             color: var(--text-color);
-            min-height: 100vh;
+            min-height: 70vh;
             display: flex;
             align-items: center;
-            text-align: center;
             justify-content: center;
             flex-direction: column;
-            padding: 120px 20px 60px;
+            text-align: center;
+            padding: 80px 20px;
+        }
+
+        .hero-section .lead {
+            opacity: 0.95;
         }
 
         .social-links a {
@@ -96,16 +112,18 @@
             border-radius: 50%;
             background: var(--primary-color);
             color: white;
-            margin: 0 5px;
+            margin: 0 6px;
             transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.15);
         }
 
         .social-links a:hover {
-            background: var(--secondary-color);
+            background: rgba(255, 255, 255, 0.95);
+            color: var(--secondary-color);
             transform: translateY(-5px);
         }
 
-        /* 🔹 Secciones */
+        /* === SECCIONES / TITULOS === */
         .section-title {
             position: relative;
             padding-bottom: 15px;
@@ -125,103 +143,181 @@
             background: var(--primary-color);
         }
 
-        /* 🔹 Sobre mí */
+        /* === SOBRE MÍ === */
         .logo {
             width: 160px;
             height: 160px;
             object-fit: cover;
             border-radius: 50%;
             border: 4px solid var(--primary-color);
-            box-shadow: 0 6px 20px rgba(13, 17, 236, 0.3);
+            box-shadow: 0 8px 30px rgba(19, 14, 48, 0.12);
             transition: transform 0.3s ease;
+            background: #fff;
         }
 
         .logo:hover {
             transform: scale(1.05);
         }
 
-        /* 🔹 Habilidades */
+        /* === HABILIDADES === */
         .skill-card {
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border-radius: 15px;
-            border: 2px solid rgba(189, 34, 246, 0.15);
+            border-radius: 12px;
+            border: 1px solid rgba(0, 0, 0, 0.04);
             background: #fff;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
 
         .skill-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 8px 25px rgba(189, 34, 246, 0.2);
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
         }
 
         .skill-icon {
-            font-size: 3rem;
-            color: var(--primary-color);
-            margin-bottom: 15px;
+            font-size: 2.6rem;
+            color: var(--secondary-color);
+            margin-bottom: 12px;
         }
 
-        /* 🔹 Portafolio */
+        /* === PORTAFOLIO === */
         .portfolio-item {
             position: relative;
             overflow: hidden;
             border-radius: 12px;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            height: 250px;
+            box-shadow: 0 6px 22px rgba(0, 0, 0, 0.06);
+            height: 240px;
         }
 
         .portfolio-item img {
-            transition: transform 0.4s ease;
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: transform 0.5s ease;
         }
 
         .portfolio-item:hover img {
-            transform: scale(1.1);
+            transform: scale(1.07);
         }
 
         .portfolio-overlay {
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(189, 34, 246, 0.85);
+            inset: 0;
+            background: linear-gradient(180deg, rgba(40, 10, 60, 0.55), rgba(40, 10, 60, 0.75));
             display: flex;
             align-items: center;
             justify-content: center;
             opacity: 0;
             transition: opacity 0.3s ease;
+            color: #fff;
+            text-align: center;
+            padding: 12px;
         }
 
         .portfolio-item:hover .portfolio-overlay {
             opacity: 1;
         }
 
-        .portfolio-overlay h4 {
-            color: #fff;
-            font-weight: bold;
+        /* === CONTACTO === */
+        .card.shadow {
+            border-radius: 12px;
         }
 
-        footer {
-            background: #1f2937;
-            color: white;
+        /* === FOOTER ESTILOS MEJORADOS === */
+        .footer {
+            background: var(--secondary-color);
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .footer::before {
+            content: "";
+            position: absolute;
+            top: -30px;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background: linear-gradient(to bottom, transparent, rgba(255, 255, 255, 0.04));
+            transform: skewY(-2deg);
+        }
+
+        .footer-link {
+            color: #d7d7d7;
+            text-decoration: none;
+            display: block;
+            margin: 6px 0;
+            transition: color 0.25s ease;
+        }
+
+        .footer-link:hover {
+            color: var(--primary-color);
+        }
+
+        .social-icon {
+            width: 42px;
+            height: 42px;
+            border: 2px solid var(--primary-color);
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            transition: all 0.3s ease;
+            background: transparent;
+        }
+
+        .social-icon:hover {
+            background: var(--primary-color);
+            color: var(--secondary-color);
+            transform: translateY(-5px);
+        }
+
+        .back-to-top {
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            transition: all 0.25s ease;
+            background: transparent;
+        }
+
+        .back-to-top:hover {
+            background: var(--primary-color);
+            color: var(--secondary-color);
+            transform: scale(1.03);
+        }
+
+        /* Responsive tweaks */
+        @media (max-width: 767px) {
+            .hero-section {
+                padding: 60px 18px;
+            }
+
+            .logo {
+                width: 130px;
+                height: 130px;
+            }
+
+            .portfolio-item {
+                height: 200px;
+            }
         }
     </style>
 </head>
 
 <body>
-    <!-- 🔹 Navbar -->
+    <!-- NAVBAR -->
     <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container">
             <a class="navbar-brand" href="#inicio">
                 <img src="imagen/superman.png" alt="Logo" />
                 Mi Portafolio
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto text-center">
                     <li class="nav-item"><a class="nav-link" href="#inicio">Inicio</a></li>
@@ -234,58 +330,60 @@
         </div>
     </nav>
 
-    <!-- 🔹 Hero -->
+    <!-- HERO -->
     <section id="inicio" class="hero-section">
-        <h1 class="display-4 fw-bold">Hola,Humano Bienvenido a mi portafolio a continuación te contare un poco sobre mí soy Alexander Garcia Pirchs</h1>
-        <p class="lead mb-4">Desarrollador Web | Creativo</p>
-        <div class="social-links mb-4">
-            <a href="https://github.com/Alexander403-prog"><i class="fab fa-github"></i></a>
-            <a href="https://www.instagram.com/alexgarciapirchs/"><i class="fab fa-instagram"></i></a>
-            <a href="https://www.facebook.com/alexiito.garciapirchs/?locale=es_LA"><i class="fab fa-facebook-f"></i></a>
+        <div class="container">
+            <h1 class="display-5 fw-bold">
+                Hola, Humano. Bienvenido a mi portafolio, soy Alexander Garcia Pirchs
+            </h1>
+            <p class="lead mb-4">Desarrollador Web | Creativo</p>
+            <a href="#contacto" class="btn btn-light btn-lg px-4">Contáctame</a>
         </div>
-        <a href="#contacto" class="btn btn-light btn-lg px-5">Contáctame</a>
     </section>
 
-    <!-- 🔹 Sobre mí -->
+    <!-- SOBRE MÍ -->
     <section id="sobre-mi" class="py-5">
         <div class="container py-5">
             <h2 class="section-title">Sobre Mí</h2>
             <div class="row align-items-center">
-                <div class="col-lg-6 text-center mb-4 mb-lg-0">
+                <div class="col-lg-5 text-center mb-4 mb-lg-0">
                     <img src="imagen/superman.png" alt="Logo" class="logo" />
                 </div>
-                <div class="col-lg-6">
-                    <h2>Puesto que tengo Auxiliar de sistemas de en la Asociacion de Agentes Aduanales</h2>
-                    <p class="text-muted">Soy una persona proactiva, excelente compañero de equipo, organizado y responsable. Disfruto mucho aprender cosas
-                    nuevas, por lo que mi objetivo es un puesto desafiante y dinámico donde poder compartir mi experiencia y a su vez sumar
-                    nuevos conocimientos. Me estoy especializando en desarrollo front-end con un enfoque particular en crear experiencias de usuario excepcionales.</p>
-                    <p class="text-muted">Con más de 1 año de experiencia, he trabajado en la Asociacion de Agentes Aduanales</p>
+                <div class="col-lg-7">
+                    <h3>Puesto: Auxiliar de sistemas en la Asociación de Agentes Aduanales</h3>
+                    <p class="text-muted">
+                        Soy una persona proactiva, organizada y responsable. Me gusta aprender cosas nuevas y mejorar
+                        continuamente mis habilidades.
+                    </p>
+                    <p class="text-muted">
+                        Con más de 1 año de experiencia en desarrollo front-end y soporte técnico.
+                    </p>
                     <a href="#portafolio" class="btn btn-primary">Ver mi trabajo</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 🔹 Habilidades -->
+    <!-- HABILIDADES -->
     <section id="habilidades" class="py-5 bg-light">
         <div class="container py-5">
             <h2 class="section-title">Habilidades</h2>
             <div class="row g-4 justify-content-center">
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <div class="card skill-card text-center p-4">
                         <i class="fas fa-code skill-icon"></i>
                         <h4>Desarrollo Web</h4>
                         <p class="text-muted">HTML, CSS, JavaScript</p>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <div class="card skill-card text-center p-4">
                         <i class="fas fa-server skill-icon"></i>
                         <h4>Backend</h4>
                         <p class="text-muted">Python, PHP, MySQL</p>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <div class="card skill-card text-center p-4">
                         <i class="fas fa-palette skill-icon"></i>
                         <h4>Diseño</h4>
@@ -296,7 +394,7 @@
         </div>
     </section>
 
-    <!-- 🔹 Portafolio -->
+    <!-- PORTAFOLIO -->
     <section id="portafolio" class="py-5">
         <div class="container py-5">
             <h2 class="section-title">Portafolio</h2>
@@ -306,18 +404,20 @@
                         <img src="https://images.unsplash.com/photo-1581090700227-1e37b190418e?auto=format&fit=crop&w=800&q=80"
                             alt="Proyecto Web" />
                         <div class="portfolio-overlay">
-                            <div class="text-center">
+                            <div>
                                 <h4>Proyecto Web</h4>
                                 <p>Desarrollo & Diseño</p>
                             </div>
                         </div>
                     </div>
                 </div>
+
+                
             </div>
         </div>
     </section>
 
-    <!-- 🔹 Contacto -->
+    <!-- CONTACTO -->
     <section id="contacto" class="py-5 bg-light">
         <div class="container py-5">
             <h2 class="section-title">Contacto</h2>
@@ -356,13 +456,73 @@
         </div>
     </section>
 
-    <footer class="py-4 text-center">
-        <p class="mb-0">&copy; 2025 Todos los derechos reservados.</p>
+    <!-- FOOTER MEJORADO -->
+    <footer class="footer text-white pt-5 pb-4">
+        <div class="container">
+            <div class="row gy-4 align-items-start">
+
+                <!-- Columna 1: Información y logo -->
+                <div class="col-lg-4 text-center text-lg-start">
+                    <div class="d-flex align-items-center justify-content-center justify-content-lg-start mb-3">
+                        <img src="imagen/superman.png" alt="Logo" width="65" height="65"
+                            class="rounded-circle border border-light me-2">
+                        <h5 class="fw-bold mb-0">Alexander García Pirchs</h5>
+                    </div>
+                    <p class="small text-light opacity-75">
+                        Descubriendo el mundo de la programación, combinando creatividad y tecnología
+                        para transformar ideas en soluciones digitales.
+                    </p>
+                </div>
+
+                <!-- Columna 2: Enlaces -->
+                <div class="col-lg-4 text-center">
+                    <h5 class="fw-bold mb-3 text-uppercase" style="color: var(--primary-color);">
+                        Enlaces Rápidos
+                    </h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#inicio" class="footer-link">Inicio</a></li>
+                        <li><a href="#sobre-mi" class="footer-link">Sobre mí</a></li>
+                        <li><a href="#habilidades" class="footer-link">Habilidades</a></li>
+                        <li><a href="#portafolio" class="footer-link">Portafolio</a></li>
+                        <li><a href="#contacto" class="footer-link">Contacto</a></li>
+                    </ul>
+                </div>
+
+                <!-- Columna 3: Redes Sociales -->
+                <div class="col-lg-4 text-center text-lg-end">
+                    <h5 class="fw-bold mb-3 text-uppercase" style="color: var(--primary-color);">
+                        Sígueme
+                    </h5>
+                    <div class="d-flex justify-content-center justify-content-lg-end gap-3">
+                        <a href="https://github.com/Alexander403-prog" target="_blank" class="social-icon"
+                            aria-label="Github"><i class="fab fa-github"></i></a>
+                        <a href="https://www.instagram.com/alexgarciapirchs/" target="_blank" class="social-icon"
+                            aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.facebook.com/alexiito.garciapirchs/?locale=es_LA" target="_blank"
+                            class="social-icon" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <hr class="my-4 border-light">
+
+            <!-- Créditos y botón -->
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center text-center">
+                <p class="mb-3 mb-md-0 small opacity-75">
+                    &copy; 2025 <strong>Alexander Garcia Pirchs</strong> | Todos los derechos reservados.
+                </p>
+                <a href="#inicio" class="btn btn-outline-light btn-sm rounded-pill px-3 back-to-top shadow-sm">
+                    <i class="fas fa-arrow-up me-1"></i> Subir
+                </a>
+            </div>
+        </div>
     </footer>
 
+    <!-- SCRIPTS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+
     <script>
-        // 🔹 Navbar efecto scroll
+        // Navbar change on scroll
         window.addEventListener("scroll", function () {
             const navbar = document.querySelector(".navbar");
             if (window.scrollY > 50) {
@@ -370,6 +530,24 @@
             } else {
                 navbar.classList.remove("scrolled");
             }
+        });
+
+        // Smooth scroll for "Subir" button (works with anchor links too)
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                // default behavior for external links
+                if (this.getAttribute('href') === '#') return;
+                // allow normal for absolute external
+                if (this.href && this.href.indexOf(window.location.origin) !== 0) return;
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                } else {
+                    // if href="#inicio" or similar and not found, scroll top
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            });
         });
     </script>
 </body>
