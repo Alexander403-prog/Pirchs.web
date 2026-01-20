@@ -6,6 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mi Portafolio - Alexander García Pirchs</title>
 
+    <!-- Fuentes Marvel Comic -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:wght@400;700&display=swap"
+        rel="stylesheet">
+
     <!-- Bootstrap & FontAwesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
@@ -15,6 +21,13 @@
 </head>
 
 <body>
+
+    <!-- 🕷️ VENOM SYMBIOTE EFFECTS -->
+    <div class="symbiote-overlay"></div>
+    <div class="symbiote-drip"></div>
+    <div class="symbiote-particles" id="symbioteParticles"></div>
+    <div class="venom-message" id="venomMessage">WE ARE VENOM</div>
+
     <!-- NAVBAR -->
     <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container">
@@ -44,10 +57,10 @@
     <section id="inicio" class="hero-section">
         <div class="container">
             <h1 class="display-5 fw-bold">
-                Hola, Humano. Bienvenido a mi portafolio, soy Alexander Garcia Pirchs
+                ¡Hola, Humano! Bienvenido a mi portafolio, soy Alexander Garcia Pirchs
             </h1>
             <p class="lead mb-4">Desarrollador Web | Creativo</p>
-            <a href="#contacto" class="btn btn-light btn-lg px-4">Contáctame</a>
+            <a href="#contacto" class="btn btn-light btn-lg px-4">¡Contáctame!</a>
         </div>
     </section>
 
@@ -75,7 +88,7 @@
     </section>
 
     <!-- HABILIDADES -->
-    <section id="habilidades" class="py-5 bg-light">
+    <section id="habilidades" class="py-5">
         <div class="container py-5">
             <h2 class="section-title">Habilidades</h2>
             <div class="row g-4 justify-content-center">
@@ -122,13 +135,13 @@
                     </div>
                 </div>
 
-                
+
             </div>
         </div>
     </section>
 
     <!-- CONTACTO -->
-    <section id="contacto" class="py-5 bg-light">
+    <section id="contacto" class="py-5">
         <div class="container py-5">
             <h2 class="section-title">Contacto</h2>
             <div class="row justify-content-center">
@@ -154,8 +167,8 @@
                                         <textarea class="form-control" rows="5" required></textarea>
                                     </div>
                                     <div class="col-12 text-center">
-                                        <button type="submit" class="btn btn-primary btn-lg px-5">Enviar
-                                            Mensaje</button>
+                                        <button type="submit" class="btn btn-primary btn-lg px-5">¡Enviar
+                                            Mensaje!</button>
                                     </div>
                                 </div>
                             </form>
@@ -186,7 +199,7 @@
 
                 <!-- Columna 2: Enlaces -->
                 <div class="col-lg-4 text-center">
-                    <h5 class="fw-bold mb-3 text-uppercase" style="color: var(--primary-color);">
+                    <h5 class="fw-bold mb-3 text-uppercase">
                         Enlaces Rápidos
                     </h5>
                     <ul class="list-unstyled">
@@ -200,7 +213,7 @@
 
                 <!-- Columna 3: Redes Sociales -->
                 <div class="col-lg-4 text-center text-lg-end">
-                    <h5 class="fw-bold mb-3 text-uppercase" style="color: var(--primary-color);">
+                    <h5 class="fw-bold mb-3 text-uppercase">
                         Sígueme
                     </h5>
                     <div class="d-flex justify-content-center justify-content-lg-end gap-3">
@@ -221,7 +234,7 @@
                 <p class="mb-3 mb-md-0 small opacity-75">
                     &copy; 2025 <strong>Alexander Garcia Pirchs</strong> | Todos los derechos reservados.
                 </p>
-                <a href="#inicio" class="btn btn-outline-light btn-sm rounded-pill px-3 back-to-top shadow-sm">
+                <a href="#inicio" class="btn btn-outline-light btn-sm px-3 back-to-top shadow-sm">
                     <i class="fas fa-arrow-up me-1"></i> Subir
                 </a>
             </div>
@@ -232,34 +245,191 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
 
     <script>
-        // Navbar change on scroll
+        // ===================================================
+        // 🕷️ VENOM SYMBIOTE - INVASIÓN GRADUAL
+        // El simbionte se apodera poco a poco de la página
+        // ===================================================
+
+        // Configuración
+        const SYMBIOTE_START = 100;      // Píxeles donde empieza la invasión
+        const SYMBIOTE_FULL = 800;       // Píxeles donde el simbionte domina completamente
+        let venomMessageShown = false;
+        let particlesCreated = false;
+
+        // Navbar change on scroll + Symbiote gradual transformation
         window.addEventListener("scroll", function () {
             const navbar = document.querySelector(".navbar");
-            if (window.scrollY > 50) {
+            const currentScrollY = window.scrollY;
+
+            // Navbar scrolled state
+            if (currentScrollY > 50) {
                 navbar.classList.add("scrolled");
             } else {
                 navbar.classList.remove("scrolled");
             }
+
+            // 🕷️ Invasión GRADUAL del Simbionte
+            handleGradualSymbioteInvasion(currentScrollY);
         });
 
-        // Smooth scroll for "Subir" button (works with anchor links too)
+        // Función para la invasión gradual del simbionte
+        function handleGradualSymbioteInvasion(scrollY) {
+            const body = document.body;
+            const root = document.documentElement;
+
+            // Calcular progreso de 0 a 1
+            let progress = 0;
+            if (scrollY > SYMBIOTE_START) {
+                progress = Math.min((scrollY - SYMBIOTE_START) / (SYMBIOTE_FULL - SYMBIOTE_START), 1);
+            }
+
+            // Actualizar variable CSS para el progreso
+            root.style.setProperty('--symbiote-progress', progress);
+
+            // Activar/desactivar clase según progreso
+            if (progress > 0) {
+                body.classList.add("symbiote-active");
+
+                // Crear partículas cuando empieza la invasión
+                if (!particlesCreated && progress > 0.1) {
+                    createSymbioteParticles();
+                    particlesCreated = true;
+                }
+
+                // Mostrar mensaje "WE ARE VENOM" al 50% de invasión
+                if (progress >= 0.5 && !venomMessageShown) {
+                    showVenomMessage();
+                }
+            } else {
+                body.classList.remove("symbiote-active");
+                particlesCreated = false;
+                venomMessageShown = false;
+                clearSymbioteParticles();
+            }
+        }
+
+        // Función para mostrar el mensaje "WE ARE VENOM"
+        function showVenomMessage() {
+            if (venomMessageShown) return;
+
+            const venomMsg = document.getElementById("venomMessage");
+            if (venomMsg) {
+                venomMsg.classList.remove("hide");
+                venomMsg.classList.add("show");
+                venomMessageShown = true;
+
+                // Ocultar después de 2.5 segundos
+                setTimeout(() => {
+                    venomMsg.classList.remove("show");
+                    venomMsg.classList.add("hide");
+                }, 2500);
+            }
+        }
+
+        // Crear partículas dinámicas del simbionte (NEGRO Y BLANCO)
+        function createSymbioteParticles() {
+            const particlesContainer = document.getElementById("symbioteParticles");
+            if (!particlesContainer) return;
+
+            // Limpiar partículas existentes
+            particlesContainer.innerHTML = '';
+
+            // Crear múltiples partículas negras y blancas
+            for (let i = 0; i < 25; i++) {
+                const particle = document.createElement('div');
+                const size = Math.random() * 8 + 3;
+                const isWhite = Math.random() > 0.7; // 30% blancas, 70% negras
+
+                particle.style.cssText = `
+                    position: absolute;
+                    width: ${size}px;
+                    height: ${size}px;
+                    background: ${isWhite ? '#FFFFFF' : '#000000'};
+                    border-radius: 50%;
+                    left: ${Math.random() * 100}%;
+                    bottom: ${Math.random() * 50}%;
+                    opacity: 0;
+                    animation: particleFloat ${Math.random() * 5 + 4}s ease-in-out infinite;
+                    animation-delay: ${Math.random() * 3}s;
+                    box-shadow: 0 0 ${size}px ${isWhite ? 'rgba(255,255,255,0.8)' : 'rgba(0,0,0,0.8)'};
+                `;
+
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Limpiar partículas del simbionte
+        function clearSymbioteParticles() {
+            const particlesContainer = document.getElementById("symbioteParticles");
+            if (particlesContainer) {
+                particlesContainer.innerHTML = '';
+            }
+        }
+
+        // Smooth scroll for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
-                // default behavior for external links
                 if (this.getAttribute('href') === '#') return;
-                // allow normal for absolute external
                 if (this.href && this.href.indexOf(window.location.origin) !== 0) return;
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
                     target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 } else {
-                    // if href="#inicio" or similar and not found, scroll top
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                 }
             });
         });
+
+        // Animaciones al cargar la página
+        window.addEventListener('load', function () {
+            const sections = document.querySelectorAll('section');
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const sectionObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animation = 'fadeInUp 0.8s ease-out forwards';
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                section.style.opacity = '0';
+                sectionObserver.observe(section);
+            });
+
+            // Inicializar progreso del simbionte
+            handleGradualSymbioteInvasion(window.scrollY);
+        });
+
+        // Easter egg: Doble click en logo para invasión completa instantánea
+        document.addEventListener('dblclick', function (e) {
+            if (e.target.closest('.navbar-brand')) {
+                const body = document.body;
+                const root = document.documentElement;
+
+                if (body.classList.contains('symbiote-active')) {
+                    // Desactivar
+                    body.classList.remove('symbiote-active');
+                    root.style.setProperty('--symbiote-progress', 0);
+                    clearSymbioteParticles();
+                    particlesCreated = false;
+                    venomMessageShown = false;
+                } else {
+                    // Activar al 100%
+                    body.classList.add('symbiote-active');
+                    root.style.setProperty('--symbiote-progress', 1);
+                    createSymbioteParticles();
+                    showVenomMessage();
+                }
+            }
+        });
     </script>
+
 </body>
 
 </html>
